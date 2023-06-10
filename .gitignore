@@ -9,9 +9,9 @@
 [Ll]ocal
 [Ss]cripts
 pyvenv.cfg
-.venv
 \venv
 \.idea
+
 pip-selfcheck.json
 
 ### Python template
