@@ -9,8 +9,8 @@
 [Ll]ocal
 [Ss]cripts
 pyvenv.cfg
-\venv
-\.idea
+venv\
+.idea\
 
 pip-selfcheck.json
 
