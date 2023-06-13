@@ -14,24 +14,24 @@ def getting_matrix_from_file_and_using_floyd_warshall_algorithm(file_name):
     print(elems)
 
     matrix = np.array([[np.int64(x) for x in el.split(" ")] for el in elems])
-    matrix_for_steps = np.tile(np.arange(matrix.shape[0]), (matrix.shape[0], 1))
+    matrix_with_steps = np.tile(np.arange(matrix.shape[0]), (matrix.shape[0], 1))
 
-    floyd_warshall(matrix, matrix_for_steps)
-    find_min_between_two_vertexes(matrix_for_steps, vertex_1, vertex_2)
+    floyd_warshall(matrix, matrix_with_steps)
+    find_min_between_two_vertexes(matrix_with_steps, vertex_1, vertex_2)
 
 
 # алгоритм Флойда по поиску минимального пути между парами вершин
-def floyd_warshall(matrix, matrix_for_steps):
+def floyd_warshall(matrix, matrix_with_steps):
     for k in range(matrix.shape[0]):
         for i in range(matrix.shape[0]):
             for j in range(matrix.shape[0]):
                 if matrix[i][j] > matrix[i][k] + matrix[k][j]:
                     matrix[i][j] = matrix[i][k] + matrix[k][j]
-                    matrix_for_steps[i][j] = k
+                    matrix_with_steps[i][j] = k
 
     with open('Data/output.txt', 'w') as f:
         for row in matrix:
-            f.write(' '.join(map(str, row)) + '\n')
+            f.write((' '.join(map(str, row)).replace(str(np.iinfo(np.int32).max), '~')) + '\n')
 
 
 # поиск минимального пути между вершинами
