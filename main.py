@@ -1,4 +1,5 @@
 import numpy as np
+import time
 
 
 # извлечение матрицы из файла происходит в матрицу numpy
@@ -13,13 +14,14 @@ def getting_matrix_from_file_and_using_floyd_warshall_algorithm(file_name):
 
     with open('for_test.txt', 'w') as f:
         f.write('\n'.join(elems).replace(' ', ', ').replace(str(np.iinfo(np.int32).max), '0'))
-    print(elems)
 
     matrix = np.array([[np.int64(x) for x in el.split(" ")] for el in elems])
     matrix_with_steps = np.tile(np.arange(matrix.shape[0]), (matrix.shape[0], 1))
 
     floyd_warshall(matrix, matrix_with_steps)
     find_min_between_two_vertexes(matrix_with_steps, vertex_1, vertex_2)
+
+    return
 
 
 # алгоритм Флойда по поиску минимального пути между парами вершин
@@ -34,11 +36,11 @@ def floyd_warshall(matrix, matrix_with_steps):
     with open('output.txt', 'w') as f:
         for row in matrix:
             f.write((' '.join(map(str, row)).replace(str(np.iinfo(np.int32).max), '~')) + '\n')
+    return
 
 
 # поиск минимального пути между вершинами
 def find_min_between_two_vertexes(matrix, vertex_1, vertex_2):
-    print(matrix)
     start = np.int64(vertex_1) - 1
     end = np.int64(vertex_2) - 1
     path = [start + 1]
@@ -50,6 +52,10 @@ def find_min_between_two_vertexes(matrix, vertex_1, vertex_2):
     with open('output.txt', 'a') as f:
         f.write(' '.join(map(str, path)))
 
+    return
+
 
 if __name__ == '__main__':
+    start = time.time()
     getting_matrix_from_file_and_using_floyd_warshall_algorithm('input.txt')
+    print(time.time() - start)
