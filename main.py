@@ -12,9 +12,6 @@ def getting_matrix_from_file_and_using_floyd_warshall_algorithm(file_name):
     vertex_1, vertex_2 = elems[-1].split(' ')
     elems = elems[1:-1]
 
-    with open('for_test.txt', 'w') as f:
-        f.write('\n'.join(elems).replace(' ', ', ').replace(str(np.iinfo(np.int32).max), '0'))
-
     matrix = np.array([[np.int64(x) for x in el.split(" ")] for el in elems])
     matrix_with_steps = np.tile(np.arange(matrix.shape[0]), (matrix.shape[0], 1))
 
@@ -56,6 +53,4 @@ def find_min_between_two_vertexes(matrix, vertex_1, vertex_2):
 
 
 if __name__ == '__main__':
-    start = time.time()
     getting_matrix_from_file_and_using_floyd_warshall_algorithm('input.txt')
-    print(time.time() - start)
